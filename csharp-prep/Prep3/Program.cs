@@ -7,8 +7,7 @@ class Program
         Random randomGenerator = new Random();
         string keepPlaying;
         do {
-            int magicNumber = randomGenerator.Next(1, 10);
-            
+            int magicNumber = randomGenerator.Next(1, 100);
             int response;
             int timesGuessed = 0;
             do {
@@ -23,7 +22,7 @@ class Program
                 timesGuessed ++;
             } while (response != magicNumber);
             Console.WriteLine($"You got it in {timesGuessed} guesses!");
-            Console.Write("Do you want to keep playing? (y/n)");
+            Console.Write("Do you want to keep playing? (y/n) ");
             keepPlaying = Console.ReadLine();
         } while (keepPlaying == "y");
     }
