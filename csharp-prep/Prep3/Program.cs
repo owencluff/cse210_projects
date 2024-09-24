@@ -12,7 +12,7 @@ class Program
             int timesGuessed = 0;
             do {
                 Console.Write("Guess my number! ");
-                
+                response = int.Parse(Console.ReadLine());
                 if (response < magicNumber) {
                     Console.WriteLine("Higher!");
                 }
