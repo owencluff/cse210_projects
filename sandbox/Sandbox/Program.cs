@@ -2,29 +2,34 @@ using System;
 
 class Program
 {
-    static List<string> getWords()
+    static List<(string, int)> GetWords(string message)
     {
-        List<string> words = new List<string>();
+        List<(string, int)> groceries = new List<(string, int)>();
         while (true)
         {
-            Console.Write("Enter a word: ");
-            string word = Console.ReadLine();
-            if (word == string.Empty)
+            Console.Write(message);
+            string word = Console.ReadLine().ToLower();
+            if (word == "done")
             {
                 break;
             }
-            words.Add(word);
+            Console.Write("Enter the price: ");
+            int price = int.Parse(Console.ReadLine());
+            groceries.Add((word, price));
         }
-        return words;
+        return groceries;
     }
     static void Main(string[] args)
     {
-        Console.WriteLine("Enter a list of words. Enter a blank line when finished.");
-        List<string> words = getWords();
-        Console.WriteLine($"There are {words.Count} words in this list.");
-        foreach (string word in words)
+        Console.WriteLine("Enter your grocery list. Enter 'done' when done.");
+        List<(string, int)> groceryList = GetWords("Enter a grocery item: ");
+        Console.WriteLine($"Grocery List ({groceryList.Count()} items)");
+        int totalCost = 0;
+        foreach ((string item, int price) in groceryList)
         {
-            Console.WriteLine(word);
+            Console.WriteLine($"* {item}: ${price}");
+            totalCost += price;
         }
+        Console.WriteLine($"The total price is ${totalCost}");
     }
 }
