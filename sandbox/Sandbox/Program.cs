@@ -20,8 +20,7 @@ class Program
     static void Main(string[] args)
     {
         Console.WriteLine("Enter a list of words. Enter a blank line when finished.");
-        List<string> words = new List<string>();
-        words = getWords();
+        List<string> words = getWords();
         Console.WriteLine($"There are {words.Count} words in this list.");
         foreach (string word in words)
         {
