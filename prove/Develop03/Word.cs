@@ -9,18 +9,33 @@ public class Word
         _isRedacted = false;
     }
 
+    public bool GetRedacted()
+    {
+        return _isRedacted;
+    }
+
     public void RedactWord()
     {
-        string result = "";
-        foreach (char c in _word)
+        if(!_isRedacted)
         {
-            result += '*'; //this can be any character you choose
+            string result = "";
+            foreach (char c in _word)
+            {
+                if (char.IsLetterOrDigit(c))
+                {
+                    result += '*';
+                }
+                else
+                {
+                    result += c;
+                }
+            }
+            _word = result;
+            _isRedacted = true;
         }
-        _word = result;
-        _isRedacted = true;
     }
     public void DisplayWord()
     {
-        Console.Write(_word);
+        Console.Write(_word + ' ');
     }
 }
