@@ -13,7 +13,15 @@ class Program
             response = Console.ReadLine();
             if (response == "" && !scripture.GetFullyRedacted())
             {
-                scripture.RedactScripture();
+                int times = 0;
+                do
+                {
+                    if (!scripture.GetFullyRedacted())
+                    {
+                        scripture.RedactScripture();                        
+                    }  
+                    times++; 
+                } while (times < 3);
             }
             else
             {
@@ -74,8 +82,9 @@ class Program
             Console.WriteLine("Welcome to the Scripture memorizing program!");
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("1) Enter a scripture to memorize");
-            Console.WriteLine("2)Memorize a scripture");
+            Console.WriteLine("2) Memorize a scripture");
             Console.WriteLine("3) Quit");
+            Console.Write("> ");
             string input = Console.ReadLine();
             if (input == "1")
             {

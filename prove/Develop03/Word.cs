@@ -23,7 +23,7 @@ public class Word
             {
                 if (char.IsLetterOrDigit(c))
                 {
-                    result += '*';
+                    result += '_';
                 }
                 else
                 {
