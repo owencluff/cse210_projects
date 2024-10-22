@@ -4,6 +4,7 @@ class Program
 {
     static void MemorizeScripture(Scripture scripture)
     {
+        Random random1 = new Random();
         string response;
         do
         {
@@ -21,7 +22,7 @@ class Program
                         scripture.RedactScripture();                        
                     }  
                     times++; 
-                } while (times < 3);
+                } while (times < random1.Next(3));
             }
             else
             {
