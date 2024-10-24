@@ -15,6 +15,8 @@ public class Word
     }
 
     public void RedactWord()
+    //Checks if a word has been redacted, then redacts it if it not.
+    //To redact a word, replace all letters and numbers with an '_', and set _is redacted to true.
     {
         if(!_isRedacted)
         {

@@ -3,6 +3,9 @@ using System;
 class Program
 {
     static void MemorizeScripture(Scripture scripture)
+    //Displays the stored scripture, then waits for user input.
+    //If the scripture isn't fully redacted and the user wants to go on, redacts between 1 and 3 words
+    //When the scripture is fully redacted or the user wants to quit, ends this part of the program.
     {
         Random random1 = new Random();
         string response;
@@ -32,6 +35,7 @@ class Program
         } while (response == "");
     }
     static List<Word> GetWords()
+    //Creates the list of words to store in a Scripture.
     {
         List<Word> keepers = new List<Word>();
         Console.WriteLine("Enter the scripture you would like to memorize!");
@@ -46,11 +50,13 @@ class Program
     }
 
     static Reference NewReference()
+    //Creates a Reference to store in the Scripture.
     {
         Console.Write("Does the passage contain multiple verses? (y/n): ");
         string response = Console.ReadLine();
         if (response == "n")
         {
+            Console.WriteLine("Enter the scripture reference:");
             Console.Write("Enter the book: ");
             string book = Console.ReadLine();
             Console.Write("Enter the chapter: ");
@@ -62,6 +68,7 @@ class Program
         }
         else
         {
+            Console.WriteLine("Enter the scripture reference:");
             Console.Write("Enter the book: ");
             string book = Console.ReadLine();
             Console.Write("Enter the chapter: ");
