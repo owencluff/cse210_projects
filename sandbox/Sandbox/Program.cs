@@ -5,22 +5,11 @@ class Program
 {
      static void Main(string[] args)
     {
-      Box small = new Box();
-      small._length = 10;
-      small._width = 7;
-      small._height = 5;
-      small._units = "in";
+      Box small = new Box(10, 7, 5);
+      small.Describe();
 
-      Console.WriteLine(small.Describe());
-      Console.WriteLine($"Volume: {small.Volume()}");
-
-      Box large = new Box();
-      large._length = 15;
-      large._width = 12;
-      large._height = 10;
-      large._units = "in";
-
-      Console.WriteLine(large.Describe());
-      Console.WriteLine($"Volume: {large.Volume()}");
+      Box large = new Box(15, 12, 10);
+      large.Describe();
+      large.Volume();
     }
 }
