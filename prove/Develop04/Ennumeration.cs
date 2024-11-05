@@ -3,6 +3,7 @@ public class Ennumeration : Activity
     private List<string> _prompts;
     private List<string> _inputs;
 
+    //a for name, b for description and c for duration
     public Ennumeration(string a, string b, int c) : base(a, b, c)
     {
         _prompts = [
@@ -21,7 +22,7 @@ public class Ennumeration : Activity
         string prompt = RandomChoice(_prompts);
         Console.WriteLine("Please think about this prompt:");
         Console.WriteLine(prompt);
-        Countdown();
+        Countdown(5);
         Console.WriteLine("Please list your items below.");
         do
         {

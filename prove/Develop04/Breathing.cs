@@ -3,7 +3,8 @@ public class Breathing : Activity
     private string _breatheIn;
     private string _breatheOut;
 
-    public Breathing(string name, string descr, int durat) :base(name, descr, durat)
+    //a for name, b for description and c for duration
+    public Breathing(string a, string b, int c) :base(a, b, c)
     {
         _breatheIn = "Breathe in...";
         _breatheOut = "Breathe out...";
@@ -15,9 +16,9 @@ public class Breathing : Activity
         do
         {
             Console.WriteLine(_breatheIn);
-            Countdown();
+            Countdown(3);
             Console.WriteLine(_breatheOut);
-            Countdown();
+            Countdown(3);
         } while (Timer());
         EndingMessage();
     }

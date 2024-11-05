@@ -37,21 +37,23 @@ public class Activity
         }
     }
     protected string RandomChoice(List<string> items)
+    //Used in the Reflection and Ennumeration activities
     {
         Random random = new Random();
         int choice = random.Next(items.Count);
         return items[choice];
     }
-    protected void Countdown()
+    protected void Countdown(int time)
+    //Used in the Breathing and Ennumeration activities
     {
         DateTime now = DateTime.Now;
-        int count = 5;
+        int t = time; //prevents the countdown from ending early
         do
         {
-            Console.Write($"{count}...");
-            count--;
+            Console.Write($"{time}...");
+            time--;
             Thread.Sleep(1000);
-        } while (DateTime.Now < now.AddSeconds(5));
+        } while (DateTime.Now < now.AddSeconds(t));
         Console.WriteLine();
     }
 }

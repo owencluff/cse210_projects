@@ -3,6 +3,7 @@ public class Reflection : Activity
     private List<string> _prompts;
     private List<string> _questions;
 
+    //For convenience, I am using a for name, b for description and c for duration
     public Reflection(string a, string b, int c) : base(a, b, c)
     {
         _prompts = [
@@ -36,11 +37,11 @@ public class Reflection : Activity
         {
             question = RandomChoice(_questions);
             Console.WriteLine(question);
-            Spinner();
+            Spinner(5);
         } while (Timer());
         EndingMessage();
     }
-    private void Spinner()
+    private void Spinner(int time)
     {
         DateTime now = DateTime.Now;
         do
@@ -51,6 +52,6 @@ public class Reflection : Activity
             Console.Write("<0>");
             Thread.Sleep(1000);
             Console.Write("\b\b\b");
-        } while (DateTime.Now < now.AddSeconds(5));
+        } while (DateTime.Now < now.AddSeconds(time));
     }
 }
