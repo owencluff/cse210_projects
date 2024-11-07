@@ -39,14 +39,14 @@ class Program
                     try
                     {
                         int duration = Activity.SetDuration();
-                        breathe = new Breathing(name, description, duration);
-                        breathe.Breathe();                    
+                        breathe = new Breathing(name, description, duration);                  
                     }
                     catch(Exception e)
                     {
                         Console.WriteLine("We ran into a problem: " + e.Message);
                     }
                 }
+                breathe.Breathe();
             }
             else if (input == "2")
             {
@@ -62,13 +62,13 @@ class Program
                     {
                         int duration = Activity.SetDuration();
                         reflect = new Reflection(name, description, duration);
-                        reflect.Reflect();
                     }
                     catch(Exception e)
                     {
                         Console.WriteLine("We ran into a problem: " + e.Message);
                     }
                 }
+                reflect.Reflect();
             }
             else if (input == "3")
             {
@@ -84,20 +84,21 @@ class Program
                     {
                         int duration = Activity.SetDuration();
                         ennum = new Ennumeration(name, description, duration);
-                        ennum.Ennumerate();
                     }
                     catch(Exception e)
                     {
                         Console.WriteLine("We ran into a problem: " + e.Message);
                     }
                 }
+                ennum.Ennumerate();
             }
             else if (input == "4")
             {
-                Console.Clear();
-                Console.WriteLine("Thanks for using the Mindfulness Program!");
-                Thread.Sleep(5000);
+                Console.WriteLine("\nThanks for using the Mindfulness Program!");
+                Thread.Sleep(1000);
                 Console.WriteLine("Goodbye!");
+                Thread.Sleep(2000);
+                Console.Clear();
                 break;
             }
             else

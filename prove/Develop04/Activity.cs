@@ -50,6 +50,7 @@ public class Activity
     }
     protected void Countdown(int time)
     //Used in the Breathing and Ennumeration activities
+    //Counts down the input number of seconds
     {
         DateTime now = DateTime.Now;
         int t = time; //prevents the countdown from ending early
