@@ -46,10 +46,10 @@ public class Reflection : Activity
         DateTime now = DateTime.Now;
         do
         {
-            Console.Write(">0<");
+            Console.Write("-|-");
             Thread.Sleep(1000);
             Console.Write("\b\b\b");
-            Console.Write("<0>");
+            Console.Write("|-|");
             Thread.Sleep(1000);
             Console.Write("\b\b\b");
         } while (DateTime.Now < now.AddSeconds(time));

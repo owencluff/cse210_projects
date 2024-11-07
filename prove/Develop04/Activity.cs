@@ -10,6 +10,10 @@ public class Activity
     {
         _name = name;
         _description = description;
+        if (duration <= 0)
+        {
+            throw new Exception($"This activity requires more than {duration} seconds.");
+        }
         _duration = duration;
         _endMessage = $"Thank you for participating in the {_name} activity!";
         _startTime = DateTime.Now;
@@ -26,6 +30,7 @@ public class Activity
         Thread.Sleep(3000);
     }
     public bool Timer()
+    //checks if the set amount of time has passed
     {
         if (DateTime.Now < _startTime.AddSeconds(_duration))
         {
@@ -50,10 +55,17 @@ public class Activity
         int t = time; //prevents the countdown from ending early
         do
         {
-            Console.Write($"{time}...");
-            time--;
+            Console.Write($"{t}...");
+            t--;
             Thread.Sleep(1000);
-        } while (DateTime.Now < now.AddSeconds(t));
+        } while (DateTime.Now < now.AddSeconds(time));
         Console.WriteLine();
+    }
+    public static int SetDuration()
+    {
+        Console.WriteLine("How long would you like to do this activity?");
+        Console.Write("Enter the number of seconds: ");
+        int duration = Convert.ToInt32(Console.ReadLine());
+        return duration;
     }
 }

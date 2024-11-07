@@ -14,8 +14,7 @@ class Program
             Console.WriteLine("    2) Reflection Activity");
             Console.WriteLine("    3) Ennumeration Activity");
             Console.WriteLine("    4) Quit Program");
-            Console.WriteLine("\n(1/2/3/4)");
-            Console.Write(">| ");
+            Console.Write("\n(1/2/3/4) >> ");
             input = Console.ReadLine();
             
             /*Pattern for the input:
@@ -34,11 +33,20 @@ class Program
                 string description = "This activity will help you relax by " + 
                 "guiding your breathing in and out slowly. Clear your mind" + 
                 " and focus on your breathing.";
-                Console.WriteLine("How long would you like to do this activity?");
-                Console.Write("Enter the number of seconds: ");
-                int duration = Convert.ToInt32(Console.ReadLine());
-                Breathing breathe = new Breathing(name, description, duration);
-                breathe.Breathe();
+                Breathing breathe = null;
+                while (breathe == null)
+                {
+                    try
+                    {
+                        int duration = Activity.SetDuration();
+                        breathe = new Breathing(name, description, duration);
+                        breathe.Breathe();                    
+                    }
+                    catch(Exception e)
+                    {
+                        Console.WriteLine("We ran into a problem: " + e.Message);
+                    }
+                }
             }
             else if (input == "2")
             {
@@ -47,11 +55,20 @@ class Program
                 string description = "This activity will help you reflect on " +
                 "times in your life where you showed strength resilience. " + 
                 "This will help you recognize the power you have in your life";
-                Console.WriteLine("How long would you like to do this activity?");
-                Console.Write("Enter the number of seconds: ");
-                int duration = Convert.ToInt32(Console.ReadLine());
-                Reflection reflect = new Reflection(name, description, duration);
-                reflect.Reflect();
+                Reflection reflect = null;
+                while (reflect == null)
+                {
+                    try
+                    {
+                        int duration = Activity.SetDuration();
+                        reflect = new Reflection(name, description, duration);
+                        reflect.Reflect();
+                    }
+                    catch(Exception e)
+                    {
+                        Console.WriteLine("We ran into a problem: " + e.Message);
+                    }
+                }
             }
             else if (input == "3")
             {
@@ -60,11 +77,20 @@ class Program
                 string description = "This activity will help you reflect on " + 
                 "the good things in your life by having you list as many " +
                 "things as you can in a certain area.";
-                Console.WriteLine("How long would you like to do this activity?");
-                Console.Write("Enter the number of Seconds: ");
-                int duration = Convert.ToInt32(Console.ReadLine());
-                Ennumeration ennum = new Ennumeration(name, description, duration);
-                ennum.Ennumerate();
+                Ennumeration ennum = null;
+                while (ennum == null)
+                {
+                    try
+                    {
+                        int duration = Activity.SetDuration();
+                        ennum = new Ennumeration(name, description, duration);
+                        ennum.Ennumerate();
+                    }
+                    catch(Exception e)
+                    {
+                        Console.WriteLine("We ran into a problem: " + e.Message);
+                    }
+                }
             }
             else if (input == "4")
             {
@@ -73,6 +99,12 @@ class Program
                 Thread.Sleep(5000);
                 Console.WriteLine("Goodbye!");
                 break;
+            }
+            else
+            {
+                Console.WriteLine("Whoops! The mindfulness program " + 
+                "can't understand your input.");
+                Thread.Sleep(5000);
             }
         }
     }
