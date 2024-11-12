@@ -11,7 +11,9 @@ public class Reflection : Activity
             "Think of a time when you did something really difficult.",
             "Think of a time when you helped someone in need.",
             "Think of a time when you did something truly selfless.",
-            "Think of a time when you failed."
+            "Think of a time when you failed.",
+            "Think of a time when someone helped you.",
+            "Think of a time when you learned something difficult."
         ];
         _questions = [
             "Why was this experience meaningful?",
@@ -19,10 +21,11 @@ public class Reflection : Activity
             "How did you get started?",
             "How did you feel when it was done?",
             "What made this time different from other times?",
-            "What is your favorite thing about this experience",
+            "What is your favorite thing about this experience?",
             "What could you learn from this experience?",
             "What did you learn about yourself from this experience?",
-            "How can you keep this experience in mind in the future?"
+            "How can you keep this experience in mind in the future?",
+            "How have you changed because of this experience?"
         ];
     }
     
