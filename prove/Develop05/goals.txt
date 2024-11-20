@@ -1,0 +1,2 @@
+Points:0
+EternalGoal:goal|do goal|1|2

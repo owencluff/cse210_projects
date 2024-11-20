@@ -6,6 +6,10 @@ public class SimpleGoal : Goal
     {
         _isCompleted = false;
     }
+    public SimpleGoal(string n, string d, int p, bool c) : base(n, d, p)
+    {
+        _isCompleted = c;
+    }
 
     public override void DisplayGoal()
     {
@@ -19,15 +23,18 @@ public class SimpleGoal : Goal
             Console.WriteLine("You have not completed this goal.");
         }
     }
-    public override string GetStringRepresentation()
-    {
-        string result = "SimpleGoal:";
-        result += base._name + '|' + base._description + '|' + base._pointValue;
-        return result;
-    }
+
     public override int CompleteGoal()
     {
         _isCompleted = true;
         return _pointValue;
+    }
+
+    public override string GetStringRepresentation()
+    {
+        string result = "SimpleGoal:";
+        result += base._name + '|' + base._description + '|' + base._pointValue;
+        result += '|' + Convert.ToString(_isCompleted);
+        return result;
     }
 }

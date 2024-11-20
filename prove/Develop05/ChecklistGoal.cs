@@ -26,12 +26,14 @@ public class ChecklistGoal : Goal
     {
         int total = 0;
         total += _oneStepValue;
+        _timesCompleted += 1;
         if (_timesCompleted == _timesToComplete)
         {
             total += _pointValue;
         }
         return total;
     }
+    
     public override string GetStringRepresentation()
     {
         string result = "ChecklistGoal:";

@@ -21,11 +21,13 @@ public class EternalGoal : Goal
         _timesCompleted += 1;
         return _pointValue;
     }
+
     public override string GetStringRepresentation()
     {
         string result = "EternalGoal:";
-        result += base._name + '|' + base._description + '|' + base._pointValue;
-        result += '|' + _timesCompleted;
+        result += base._name + '|' + base._description + '|';
+        result += base._pointValue.ToString() + '|' + _timesCompleted.ToString();
+        Console.WriteLine(result);
         return result;
     }
 }
