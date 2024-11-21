@@ -17,9 +17,9 @@ public abstract class Goal
     }
     public virtual void DisplayGoal()
     {
-        Console.WriteLine(_name);
-        Console.WriteLine(_description);
-        Console.WriteLine($"This goal is worth {_pointValue}.");
+        Console.WriteLine($"{_name}:");
+        Console.WriteLine($">>Description: {_description}");
+        Console.WriteLine($">>Worth: {_pointValue} points");
     }
     public abstract string GetStringRepresentation();
     public abstract int CompleteGoal();

@@ -14,14 +14,7 @@ public class SimpleGoal : Goal
     public override void DisplayGoal()
     {
         base.DisplayGoal();
-        if (_isCompleted)
-        {
-            Console.WriteLine("You have completed this goal.");
-        }
-        else
-        {
-            Console.WriteLine("You have not completed this goal.");
-        }
+        Console.WriteLine($">>has been completed: {_isCompleted}");
     }
 
     public override int CompleteGoal()

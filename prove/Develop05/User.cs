@@ -19,6 +19,10 @@ public class User
     {
         return _name;
     }
+    public int GetPoints()
+    {
+        return _pointsTotal;
+    }
     
     public void AddPoints(int points)
     {
@@ -38,19 +42,14 @@ public class User
         string description = Console.ReadLine();
         Console.Write("How many points should it be worth: ");
         int points = Convert.ToInt32(Console.ReadLine());
+        Goal g;
         if (type == "1")
         {
-            SimpleGoal g = new SimpleGoal(name, description, points);
-            _goals.Add(g);
-            Console.WriteLine("\nYou have set a new simple goal:");
-            g.DisplayGoal();
+            g = new SimpleGoal(name, description, points);
         }
         else if (type == "2")
         {
-            EternalGoal g = new EternalGoal(name, description, points);
-            _goals.Add(g);
-            Console.WriteLine("\nYou have set a new eternal goal:");
-            g.DisplayGoal();
+            g = new EternalGoal(name, description, points);
         }
         else if (type == "3")
         {
@@ -58,16 +57,17 @@ public class User
             int oneS = Convert.ToInt32(Console.ReadLine());
             Console.Write("How many steps are there: ");
             int steps = Convert.ToInt32(Console.ReadLine());
-            ChecklistGoal g = new ChecklistGoal(name, description, points, oneS, steps);
-            _goals.Add(g);
-            Console.WriteLine("\nYou have set a new checklist goal:");
-            g.DisplayGoal();
+            g = new ChecklistGoal(name, description, points, oneS, steps);
         }
         else
         {
             throw new Exception("Unrecognized goal type");
             //catches the situation where the input type is not supported
         }
+        _goals.Add(g);
+        Console.Clear();
+        Console.WriteLine("You have added a new Goal:");
+        g.DisplayGoal();
     }
 
     public void GetGoalNames()
@@ -99,14 +99,16 @@ public class User
 
     public void DisplayInfo()
     {
-        Console.WriteLine($"Welcome, {_name}!");
+        Console.WriteLine($"{_name}'s goals");
         Console.WriteLine($"Total Points: {_pointsTotal}");
     }
     public void DisplayGoals()
     {
+        Console.WriteLine();
         foreach (Goal g in _goals)
         {
             g.DisplayGoal();
+            Console.WriteLine();
         }
     }
     

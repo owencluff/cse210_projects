@@ -14,7 +14,7 @@ public class EternalGoal : Goal
     public override void DisplayGoal()
     {
         base.DisplayGoal();
-        Console.WriteLine($"You have completed this goal {_timesCompleted} times.");
+        Console.WriteLine($">>completed {_timesCompleted} times.");
     }
     public override int CompleteGoal()
     {
@@ -27,7 +27,6 @@ public class EternalGoal : Goal
         string result = "EternalGoal:";
         result += base._name + '|' + base._description + '|';
         result += base._pointValue.ToString() + '|' + _timesCompleted.ToString();
-        Console.WriteLine(result);
         return result;
     }
 }
