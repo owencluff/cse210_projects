@@ -19,8 +19,16 @@ public class SimpleGoal : Goal
 
     public override int CompleteGoal()
     {
-        _isCompleted = true;
-        return _pointValue;
+        if (!_isCompleted)
+        {
+            _isCompleted = true;
+            return _pointValue;
+        }
+        else
+        {
+            Console.WriteLine("This goal has already been completed");
+            return 0;
+        }
     }
 
     public override string GetStringRepresentation()

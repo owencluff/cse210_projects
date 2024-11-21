@@ -25,11 +25,14 @@ public class ChecklistGoal : Goal
     public override int CompleteGoal()
     {
         int total = 0;
-        total += _oneStepValue;
-        _timesCompleted += 1;
-        if (_timesCompleted == _timesToComplete)
+        if (_timesCompleted < _timesToComplete)
         {
-            total += _pointValue;
+            total += _oneStepValue;
+            _timesCompleted += 1;
+            if (_timesCompleted == _timesToComplete)
+            {
+                total += _pointValue;
+            }
         }
         return total;
     }

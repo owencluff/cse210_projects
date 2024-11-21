@@ -118,10 +118,10 @@ public class User
     SimpleGoal:name|description|pointvalue|iscompleted
     EternalGoal:name|description|pointvalue|timescompleted
     ChecklistGoal:name|description|pointvalue|timescompleted|timestocomplete
-
-    this checks what type of goal each stored goal is, then
-    splits each string and creates a new instance of the 
-    appriopriate class and stores it in a list.
+    The first line in every saved file stores the total points
+    accumulated from goals.
+    It is formatted like this:
+    Points:pointtotal
     */
     public void SaveGoals(string filename)
     {
@@ -141,6 +141,7 @@ public class User
         List<Goal> goals = new List<Goal>();
         foreach (string line in lines)
         {
+            Goal g;
             string[] bits = line.Split(':');
             string[] info = bits[1].Split('|');
             if (bits[0] == "Points")
@@ -153,7 +154,7 @@ public class User
                 string d = info[1];
                 int p = Convert.ToInt32(info[2]);
                 bool c = Convert.ToBoolean(info[3]);
-                SimpleGoal g = new SimpleGoal(n, d, p, c);
+                g = new SimpleGoal(n, d, p, c);
                 goals.Add(g);
             }
             if(bits[0] == "EternalGoal")
@@ -162,7 +163,7 @@ public class User
                 string d = info[1];
                 int p = Convert.ToInt32(info[2]);
                 int t = Convert.ToInt32(info[3]);
-                EternalGoal g = new EternalGoal(n, d, p, t);
+                g = new EternalGoal(n, d, p, t);
                 goals.Add(g);
             }
             if(bits[0] == "ChecklistGoal")
@@ -172,7 +173,7 @@ public class User
                 int p = Convert.ToInt32(info[2]);
                 int tc = Convert.ToInt32(info[3]);
                 int ttc = Convert.ToInt32(info[4]);
-                ChecklistGoal g = new ChecklistGoal(n, d, p, tc, ttc);
+                g = new ChecklistGoal(n, d, p, tc, ttc);
                 goals.Add(g);
             }
         }
