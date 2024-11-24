@@ -1,3 +1,5 @@
+using System.Xml.XPath;
+
 public class EternalGoal : Goal
 {
     private int _timesCompleted;
@@ -24,9 +26,7 @@ public class EternalGoal : Goal
 
     public override string GetStringRepresentation()
     {
-        string result = "EternalGoal:";
-        result += base._name + '|' + base._description + '|';
-        result += base._pointValue.ToString() + '|' + _timesCompleted.ToString();
-        return result;
+        string result = "EternalGoal:" + base.GetStringRepresentation();
+        return result + '|' + _timesCompleted;
     }
 }

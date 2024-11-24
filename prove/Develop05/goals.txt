@@ -1,3 +1,4 @@
-Points:0
-EternalGoal:goal|do goal|1|2
-ChecklistGoal:moon|go to the moon 5 times|10000|19|0|5
+Points:435
+SimpleGoal:fasdfa|adf a|4|False
+EternalGoal:afea|fadsfj'|6|0
+ChecklistGoal:asdfa|a fda |32|435|1|32

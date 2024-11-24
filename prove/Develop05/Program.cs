@@ -122,7 +122,12 @@ class Program
             }
             else
             {
-                Console.WriteLine("unexpected input");
+                string response;
+                do
+                {
+                    Console.Write("Unexpected input");
+                    response = Console.ReadLine();
+                }while(response == null);
             }
         }
     }

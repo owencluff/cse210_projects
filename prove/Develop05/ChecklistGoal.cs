@@ -20,6 +20,7 @@ public class ChecklistGoal : Goal
     public override void DisplayGoal()
     {
         base.DisplayGoal();
+        Console.WriteLine($">>Each step worth: {_oneStepValue} points");
         Console.WriteLine($">>{_timesCompleted}/{_timesToComplete} times completed");
     }
     public override int CompleteGoal()
@@ -36,13 +37,11 @@ public class ChecklistGoal : Goal
         }
         return total;
     }
-    
+
     public override string GetStringRepresentation()
     {
-        string result = "ChecklistGoal:";
-        result += base._name + '|' + base._description + '|';
-        result += base._pointValue.ToString() + '|' + _oneStepValue.ToString();
-        result += '|' + _timesCompleted.ToString() + '|' + _timesToComplete.ToString();
-        return result;
+        string result = "ChecklistGoal:" + base.GetStringRepresentation();
+        result += '|' + _oneStepValue.ToString() + '|' + _timesCompleted.ToString();
+        return result + '|' + _timesToComplete.ToString();
     }
 }

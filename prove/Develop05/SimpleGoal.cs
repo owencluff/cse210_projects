@@ -33,9 +33,7 @@ public class SimpleGoal : Goal
 
     public override string GetStringRepresentation()
     {
-        string result = "SimpleGoal:";
-        result += base._name + '|' + base._description + '|' + base._pointValue;
-        result += '|' + Convert.ToString(_isCompleted);
-        return result;
+        string result = "SimpleGoal:" + base.GetStringRepresentation();
+        return result + '|' + _isCompleted.ToString();
     }
 }

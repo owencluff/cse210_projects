@@ -1,3 +1,5 @@
+using System.Xml.XPath;
+
 public abstract class Goal
 {
     protected string _name;
@@ -21,6 +23,9 @@ public abstract class Goal
         Console.WriteLine($">>Description: {_description}");
         Console.WriteLine($">>Worth: {_pointValue} points");
     }
-    public abstract string GetStringRepresentation();
+    public virtual string GetStringRepresentation()
+    {
+        return _name + '|' + _description + '|' + _pointValue.ToString();
+    }
     public abstract int CompleteGoal();
 }
