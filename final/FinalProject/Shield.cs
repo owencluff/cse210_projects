@@ -5,7 +5,7 @@ public class Shield : Equipment
     private int _currentShield;
     private int _shieldRefresh;
 
-    public Shield(int a, int de, int dg, int m, int c, int p, int r) : base(a, de, dg, m, c)
+    public Shield(string n, int a, int de, int dg, int c, int p, int r) : base(n, a, de, dg, c)
     {
         _shieldPoints = p;
         _currentShield = p;
@@ -14,7 +14,6 @@ public class Shield : Equipment
 
     public override void DisplayEquipment()
     {
-        Console.WriteLine("Shield");
         base.DisplayEquipment();
         Console.WriteLine($"Shield Points: {_shieldPoints}");
         Console.WriteLine($"Shield Refresh: {_shieldRefresh}");

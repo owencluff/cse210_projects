@@ -3,7 +3,7 @@ public class Systems
     private int _attackBonus = 0;
     private int _defenseBonus = 0;
     private int _dodgeBonus = 0;
-    private int _mobilityBonus = 0;
+    private List<Ability> _abilityBonuses;
 
     public Systems(List<Equipment> s)
     {
@@ -12,7 +12,7 @@ public class Systems
             _attackBonus += e.GetAttackBonus();
             _defenseBonus += e.GetDefenseBonus();
             _dodgeBonus += e.GetDodgeBonus();
-            _mobilityBonus += e.GetMobilityBonus();
+            _abilityBonuses.Add(e.GetAbilityBonus());
         }
     }
 
@@ -21,9 +21,15 @@ public class Systems
         _attackBonus += e.GetAttackBonus();
         _defenseBonus += e.GetDefenseBonus();
         _dodgeBonus += e.GetDodgeBonus();
-        _mobilityBonus += e.GetMobilityBonus();
     }
 
+    public void DisplaySystems()
+    {
+        Console.WriteLine("Systems:");
+        Console.WriteLine($"Attack Bonus: {_attackBonus}");
+        Console.WriteLine($"Defense Bonus: {_defenseBonus}");
+        Console.WriteLine($"Dodge Bonus: {_dodgeBonus}");
+    }
     public int GetAttackBonus()
     {
         return _attackBonus;
@@ -36,8 +42,16 @@ public class Systems
     {
         return _dodgeBonus;
     }
-    public int GetMobilityBonus()
+    public int GetAbilityBonus(string ability)
     {
-        return _mobilityBonus;
+        int result = 0;
+        foreach(Ability a in _abilityBonuses)
+        {
+            if (a.GetAbilityName() == ability)
+            {
+                result += a.GetAbilityScore();
+            }
+        }
+        return result;
     }
 }

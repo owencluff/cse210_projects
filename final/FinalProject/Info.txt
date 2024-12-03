@@ -1,0 +1,18 @@
+A small description of things:
+
+Skills:
+row is mech ability, column is pilot ability
+
+|----|Grit|Intuition|Knowledge|
+|Armor|Defense|Evade*|Shield*|
+|Core|Heat|Adapt|Tech|
+|Frame|Flinch|Counter|Repair|
+|Mobility|Escape|Dodge|Stealth|
+|Power|Melee|Attack|Intel*|
+*is subject to change
+
+things that may be added:
+- equipment slots
+- multiple weapon equips
+- Action points
+- 
