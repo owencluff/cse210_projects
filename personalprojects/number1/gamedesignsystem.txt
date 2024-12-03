@@ -1,0 +1,19 @@
+build a system for storing a character in a theoretical tactical rpg
+>> if this doesn't make sense: then storing a character in an existing rpg
+
+rpg concept:
+>> you are a pilot, someone who pilots a big mech. each pilot has three attributes, grit, intuition, knowledge
+>> each mech has 5 attributes
+
+
+classes:
+    character/unit
+    - pilot (class)
+    - mech (class)
+    pilot
+    - attributes (class?)
+    mech
+    - attributes
+    - equipment (class)
+    system
+    
