@@ -4,10 +4,29 @@ public class Pilot
     //Abilities in order: Grit, Intuition, Knowledge
     private List<Ability> _abilities;
     
+    public Pilot()
+    {
+        _name = "John Pilot";
+        _abilities = [
+          new Ability("Grit", 20),
+          new Ability("Intuition", 15),
+          new Ability("Knowledge", 15)  
+        ];
+    }
     public Pilot(string n, List<Ability> a)
     {
         _name = n;
         _abilities = a;
+    }
+
+    static public Pilot CreatePilot()
+    {
+        Console.Write("Enter Pilot's name: ");
+        string name = Console.ReadLine();
+        Ability grit = Ability.SetAbility("Grit");
+        Ability intuit = Ability.SetAbility("Intuition");
+        Ability know = Ability.SetAbility("Knowledge");
+        return new Pilot(name, [grit, intuit, know]);
     }
 
     public void DisplayPilot()

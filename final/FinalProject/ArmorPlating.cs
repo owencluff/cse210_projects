@@ -4,7 +4,13 @@ public class ArmorPlating : Equipment
     private int _damageReduction;
     private int _mobilityPenalty;
 
-    public ArmorPlating(string n, int a, int de, int dg, int c, int dr, int mp) : base(n, a, de, dg, c)
+    public ArmorPlating() : base(("Basic Plating", 0, 15, 0, 0))
+    {
+        _damageReduction = 1;
+        _mobilityPenalty = 15;
+        base.SetAbilityBonus(new Ability("Mobility", -15));
+    }
+    public ArmorPlating((string, int, int, int, int) i, int dr, int mp) : base(i)
     /*
     n = name, a = attack bonus, de = defense bonus, dg = dodge bonus
     c = equip cost, dr = damage reduction, mp = mobility penalty
@@ -14,6 +20,16 @@ public class ArmorPlating : Equipment
         _damageReduction = dr;
         _mobilityPenalty = mp;
         base.SetAbilityBonus(new Ability("Mobility", -mp));
+    }
+
+    static public ArmorPlating CreatePlating()
+    {
+        var i = CreateEquipmentBonus();
+        Console.Write("Damage Reduction: ");
+        int dr = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Mobility Penalty: ");
+        int mp = Convert.ToInt32(Console.ReadLine());
+        return new ArmorPlating(i, dr, mp);
     }
 
     public override void DisplayEquipment()

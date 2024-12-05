@@ -5,11 +5,29 @@ public class Shield : Equipment
     private int _currentShield;
     private int _shieldRefresh;
 
-    public Shield(string n, int a, int de, int dg, int c, int p, int r) : base(n, a, de, dg, c)
+    public Shield() : base("Basic Shield", 0, 0, 10, 1)
+    {
+        _shieldPoints = 3;
+        _currentShield = 3;
+        _shieldRefresh = 1;
+    }
+    public Shield((string, int, int, int, int) i , int p, int r) : base(i)
     {
         _shieldPoints = p;
         _currentShield = p;
         _shieldRefresh = r;
+    }
+
+    static public Shield CreateShield()
+    {
+        var i = CreateEquipmentBonus();
+        Console.Write("Equip Cost: ");
+        int ec = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Shield Points: ");
+        int sp = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Refresh Rate: ");
+        int rr = Convert.ToInt32(Console.ReadLine());
+        return new Shield(i, sp, rr);
     }
 
     public override void DisplayEquipment()
@@ -33,12 +51,15 @@ public class Shield : Equipment
         int result = _currentShield - damage;
         if (result <= 0)
         {
-            return 0;
+            result = 0;
         }
         else
         {
-            return Math.Abs(result);
+            result = Math.Abs(result);
         }
+        Console.WriteLine($"Shield took {damage} and has {_currentShield} points remaining");
+        Console.WriteLine($"Leftover damage: {result}");
+        return result;
     }
     public void ShieldRefresh()
     {

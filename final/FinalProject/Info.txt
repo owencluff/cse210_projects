@@ -15,4 +15,5 @@ things that may be added:
 - equipment slots
 - multiple weapon equips
 - Action points
-- 
+
+

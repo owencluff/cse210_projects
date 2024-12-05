@@ -3,8 +3,14 @@ public class Systems
     private int _attackBonus = 0;
     private int _defenseBonus = 0;
     private int _dodgeBonus = 0;
-    private List<Ability> _abilityBonuses;
+    private List<Ability> _abilityBonuses = [];
 
+    public Systems()
+    {
+        _attackBonus = 0;
+        _defenseBonus = 0;
+        _dodgeBonus = 0;
+    }
     public Systems(List<Equipment> s)
     {
         foreach (Equipment e in s)

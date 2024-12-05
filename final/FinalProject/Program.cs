@@ -1,31 +1,184 @@
 class Program
 {
+    static string YesOrNo(string question)
+    {
+        Console.WriteLine(question);
+        Console.Write("(y/n)>| ");
+        return Console.ReadLine();
+    }
     static void Main(string[] args)
     {
-        //The default, balanced mech.
-        List<Ability> mechAbilities = new List<Ability>([
-            new Ability("Armor", 30),
-            new Ability("Core", 30),
-            new Ability("Frame", 30),
-            new Ability("Mobility", 30),
-            new Ability("Power", 30)
-        ]);
-        //This will be the default pilot, but is not necessarily the best pilot.
-        List<Ability> pilotAbilities = new List<Ability>([
-            new Ability("Grit", 20),
-            new Ability("Intuition", 15),
-            new Ability("Knowledge", 15)
-        ]);
-        Mech mech1 = new Mech("mech1", mechAbilities);
-        Pilot pilot1 = new Pilot("pilot1", pilotAbilities);
-        Unit unit1 = new Unit(pilot1, mech1, new Systems([]));
-        
-        Weapon rifle = new Weapon("rifle", 15, 0, 0, 1, 30, 1);
-        Shield basicShield = new Shield("basic shield", 0, 0, 10, 1, 3, 1);
-        ArmorPlating basicPlating = new ArmorPlating("basic plating", 0, 15, 0, 0, 1, 15);
-        unit1.AddEquipment(rifle);
-        unit1.AddEquipment(basicShield);
-        unit1.AddEquipment(basicPlating);
-        
+        Unit userUnit = null; //this is created here so I can catch a user not creating a character
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("Hello and Welcome!");
+            Console.WriteLine("What would you like to do?");
+            Console.WriteLine("1) Create a character");
+            Console.WriteLine("2) View your Character");
+            Console.WriteLine("3) Save your character");
+            Console.WriteLine("4) Load a character");
+            Console.WriteLine("5) Use a character");
+            Console.WriteLine("6) Upgrade a character");
+            Console.WriteLine("7) Quit");
+            Console.Write("\n(1/2/3/4/5/6/7)>| ");
+            string response = Console.ReadLine();
+
+            if (response == "1")
+            //creates a new character
+            {
+                userUnit = Unit.CreateUnit();
+                string input = YesOrNo("Would you like to create a custom Weapon?");
+                if (input == "y")
+                {
+                    userUnit.AddEquipment(Weapon.CreateWeapon());
+                }
+                input = YesOrNo("Would you like to create a custom Shield?");
+                if (input == "y")
+                {
+                    userUnit.AddEquipment(Shield.CreateShield());
+                }
+                input = YesOrNo("Would you like to create custom Armor Plating?");
+                if (input == "y")
+                {
+                    userUnit.AddEquipment(ArmorPlating.CreatePlating());
+                }
+            }
+            if (response == "2")
+            //displays current character
+            {
+                if (userUnit == null)
+                {
+                    Console.WriteLine("You have no current character!");
+                    try
+                    {
+                        string answer = YesOrNo("Would you like to use the default character?");
+                        if (answer == "y")
+                        {
+                            userUnit = new Unit();
+                        }
+                        else if (answer == "n")
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            throw new Exception("unrecognized input");
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+                userUnit.DisplayInfo();
+                string input;
+                do
+                {
+                    Console.WriteLine("Press any key to continue");
+                    input = Console.ReadLine();
+                }while(input == null);
+            }
+            if (response == "3")
+            //saves a character
+            {
+                //i need ro make a way to save a character
+            }
+            if (response == "4")
+            //loads a character
+            {
+                //ditto
+            }
+            if (response == "5")
+            //uses current character
+            {
+                if (userUnit == null)
+                {
+                    Console.WriteLine("You have no current character!");
+                    try
+                    {
+                        string answer = YesOrNo("Would you like to use the default unit?");
+                        if (answer == "y")
+                        {
+                            userUnit = new Unit();
+                        }
+                        else if (answer == "n")
+                        {
+                            return;
+                        }
+                        else
+                        {
+                            throw new Exception("unrecognized input");
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+                Unit enemy1 = new Unit();
+                //This is mostly just to make sure things are set up correctly
+                enemy1.SetHitPoints();
+                userUnit.SetHitPoints();
+                userUnit.SetMovePoints();
+                 while (true)
+                {
+                    Console.WriteLine("What would you like to do?");
+                    Console.WriteLine("1) Make an attack");
+                    Console.WriteLine("2) Defend against an attack");
+                    Console.WriteLine("3) Dodge an attack");
+                    Console.WriteLine("4) Quit");
+                    Console.Write("\n(1/2/3/4)>| ");
+                    string choice = Console.ReadLine();
+                    Console.Clear();
+
+                    if (choice == "1")
+                    {
+                        bool enemySuccess = enemy1.MakeDefense(0, 0);
+                        int damage = userUnit.MakeAttack(15, enemySuccess, 0);
+                        enemy1.TakeDamage(damage);
+                    }
+                    if (choice == "2")
+                    {
+                        bool playerSuccess = userUnit.MakeDefense(0, 0);
+                        int damage = enemy1.MakeAttack(30, playerSuccess, 0);
+                    }
+                    if (choice == "3")
+                    {
+                        bool playerSuccess = userUnit.MakeDodge(0, 0);
+                        int damage = enemy1.MakeAttack(30, playerSuccess, 0);
+                    }
+                    if (choice == "4")
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Unrecognized Input");
+                    }
+
+                }
+
+                
+            }
+            if (response == "6")
+            //upgrade a unit
+            {
+                //add or remove equipment
+                //upgrade stats?
+            }
+            if (response == "7")
+            {
+                string input = YesOrNo("Are you sure?");
+                if (input == "y")
+                {
+                    break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Input not understood");
+            }
+        }
     }
 }

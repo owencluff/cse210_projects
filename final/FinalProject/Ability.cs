@@ -9,6 +9,12 @@ public class Ability
         _score = s;
     }
 
+    static public Ability SetAbility(string name)
+    {
+        Console.Write($"Enter the {name}");
+        return new Ability(name, Convert.ToInt32(Console.ReadLine()));
+    }
+
     public string GetAbility()
     {
         return $"{_name}: {_score}";
