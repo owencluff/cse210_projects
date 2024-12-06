@@ -11,7 +11,7 @@ public class Ability
 
     static public Ability SetAbility(string name)
     {
-        Console.Write($"Enter the {name}");
+        Console.Write($"Enter the {name}: ");
         return new Ability(name, Convert.ToInt32(Console.ReadLine()));
     }
 
@@ -30,5 +30,10 @@ public class Ability
     public int GetAbilityBonus()
     {
         return _score / 10;
+    }
+
+    public string GetSaveData()
+    {
+        return $",Ability:{_name}.{_score}";
     }
 }

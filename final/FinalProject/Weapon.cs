@@ -46,4 +46,11 @@ public class Weapon : Equipment
         var result = _damage * multiplier;
         return Convert.ToInt32(result);
     }
+
+    public override string GetSaveData(string type)
+    {
+        string keeper = base.GetSaveData(type);
+        keeper += $",Range:{_range},Damage:{_damage}";
+        return keeper;
+    }
 }

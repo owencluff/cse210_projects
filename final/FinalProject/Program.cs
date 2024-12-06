@@ -33,6 +33,10 @@ class Program
                 {
                     userUnit.AddEquipment(Weapon.CreateWeapon());
                 }
+                else
+                {
+                    userUnit.AddEquipment(new Weapon());
+                }
                 input = YesOrNo("Would you like to create a custom Shield?");
                 if (input == "y")
                 {
@@ -43,6 +47,9 @@ class Program
                 {
                     userUnit.AddEquipment(ArmorPlating.CreatePlating());
                 }
+                userUnit.SetHitPoints();
+                userUnit.SetMovePoints();
+                userUnit.SetWeapon();
             }
             if (response == "2")
             //displays current character
@@ -72,12 +79,8 @@ class Program
                     }
                 }
                 userUnit.DisplayInfo();
-                string input;
-                do
-                {
-                    Console.WriteLine("Press any key to continue");
-                    input = Console.ReadLine();
-                }while(input == null);
+                Console.WriteLine("\nPress enter to continue");
+                Console.ReadLine();
             }
             if (response == "3")
             //saves a character
@@ -121,7 +124,7 @@ class Program
                 enemy1.SetHitPoints();
                 userUnit.SetHitPoints();
                 userUnit.SetMovePoints();
-                 while (true)
+                while (true)
                 {
                     Console.WriteLine("What would you like to do?");
                     Console.WriteLine("1) Make an attack");
@@ -156,10 +159,7 @@ class Program
                     {
                         Console.WriteLine("Unrecognized Input");
                     }
-
                 }
-
-                
             }
             if (response == "6")
             //upgrade a unit

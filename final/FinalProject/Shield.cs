@@ -5,7 +5,7 @@ public class Shield : Equipment
     private int _currentShield;
     private int _shieldRefresh;
 
-    public Shield() : base("Basic Shield", 0, 0, 10, 1)
+    public Shield() : base(("Basic Shield", 0, 0, 10, 1))
     {
         _shieldPoints = 3;
         _currentShield = 3;
@@ -70,5 +70,12 @@ public class Shield : Equipment
                 _currentShield ++;
             }
         }
+    }
+
+    public override string GetSaveData(string type)
+    {
+        string keeper = base.GetSaveData(type);
+        keeper += $",ShieldPoints:{_shieldPoints},Refresh:{_shieldRefresh}";
+        return keeper;
     }
 }

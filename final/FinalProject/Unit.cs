@@ -1,3 +1,5 @@
+using System.Numerics;
+
 public class Unit
 /*
 Missing: HP, Movement
@@ -44,6 +46,10 @@ Missing: HP, Movement
     {
         int frame = _mech.GetAbilityScore("Frame") + _systems.GetAbilityBonus("Frame");
         _hitPoints = frame / 10;
+    }
+    public void SetWeapon()
+    {
+        _mech.GetEquipmentOfType<Weapon>();
     }
     public void TakeDamage(int damage)
     {
@@ -102,7 +108,9 @@ Missing: HP, Movement
     {
         Console.WriteLine(GetName());
         _pilot.DisplayPilot();
+        Console.WriteLine();
         _mech.DisplayMech();
+        Console.WriteLine();
         _systems.DisplaySystems();
     }
 
@@ -209,5 +217,110 @@ Missing: HP, Movement
             return true;
         }
         return false;
+    }
+
+    public void SaveUnit(string filename)
+    /*
+    Each unit is saved in a text file
+    The format is as follows, one item per line:
+    Line0 Pilot|Name:name,Ability:Name%Score,Ability:Name%Score,Ability:Name%Score
+    Line1 Mech|Name:name,Ability:Name%Score,Ability:Name%Score,Ability:Name%Score,etc
+    Line2 Equipment:Type|Name:name,Statistics:Int,etc
+    etc
+    */
+    {
+        using (StreamWriter outputFile = new StreamWriter(filename))
+        {
+            outputFile.WriteLine(_pilot.GetSaveData());
+            outputFile.WriteLine(_mech.GetSaveData());
+            foreach (Equipment e in _mech.GetEquipment())
+            {
+                outputFile.WriteLine(e.GetSaveData(e.GetType().ToString()));
+            }
+        }
+    }
+    static private string ReadData(string[] info, string type)
+    {
+        string result = null;
+        if (info[0] == type)
+        {
+            result = info[1];
+        }
+        return result;
+    }
+    static private (string, List<Ability>) GetLoadData(string[] chunks)
+    {
+        string name = "Empty";
+        List<Ability> abilities = [];
+        foreach (string chunk in chunks)
+        {
+            string[] bits = chunk.Split(':');
+            name = ReadData(bits, "Name");
+            string[] point = ReadData(bits, "Ability").Split('.');
+            abilities.Add(new Ability(point[0], Convert.ToInt32(point[1])));
+        }
+        return (name, abilities);
+    }
+    public void LoadUnit(string filename)
+    {
+        string[] lines = System.IO.File.ReadAllLines(filename);
+        foreach (string line in lines)
+        {
+            string[] parts = line.Split('|');
+            string[] type = parts[0].Split(":");
+            string[] chunks = parts[1].Split(',');
+            if (type[0] == "Pilot")
+            {
+                var info = GetLoadData(chunks);
+                _pilot = new Pilot(info.Item1, info.Item2);
+            }
+            if (type[0] == "Mech")
+            {
+                var info = GetLoadData(chunks);
+                _mech = new Mech(info.Item1, info.Item2);
+            }
+            if (type[0] == "Equipment")
+            {
+                string name = null;
+                int ab = 0;
+                int deb = 0;
+                int dgb = 0;
+                int ec = 0;
+                int range = 0;
+                int damage = 0;
+                int sp = 0;
+                int rr = 0;
+                int dr = 0;
+                int mp = 0;
+                foreach (string chunk in chunks)
+                {
+                    string[] bits = chunk.Split(':');
+                    name = ReadData(bits, "Name");
+                    ab = Convert.ToInt32(ReadData(bits, "AttackBonus"));
+                    deb = Convert.ToInt32(ReadData(bits, "DefenseBonus"));
+                    dgb = Convert.ToInt32(ReadData(bits, "DodgeBonus"));
+                    ec = Convert.ToInt32(ReadData(bits, "EquipCost"));
+                    range = Convert.ToInt32(ReadData(bits, "Range"));
+                    damage = Convert.ToInt32(ReadData(bits, "Damage"));
+                    sp = Convert.ToInt32(ReadData(bits, "ShieldPoints"));
+                    rr = Convert.ToInt32(ReadData(bits, "RefreshRate"));
+                    dr = Convert.ToInt32(ReadData(bits, "DamageReduction"));
+                    mp = Convert.ToInt32(ReadData(bits, "MobilityPenalty"));
+                }
+                var i = (name, ab, deb, dgb, ec);
+                if (type[1] == "Weapon")
+                {
+                    AddEquipment(new Weapon(i, range, damage));
+                }
+                if (type[1] == "Shield")
+                {
+                    AddEquipment(new Shield(i, sp, rr));
+                }
+                if (type[1] == "ArmorPlating")
+                {
+                    AddEquipment(new ArmorPlating(i, dr, mp));
+                }
+            }
+        }
     }
 }
