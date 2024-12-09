@@ -81,7 +81,6 @@ public class Mech
         return _equipLoad;
     }
     public T GetEquipmentOfType<T>() where T : Equipment
-    //This is Claude.ai's suggestion.
     {
         return _equipment.OfType<T>().FirstOrDefault();
     }
@@ -101,5 +100,15 @@ public class Mech
     {
         _equipment.Add(e);
         _equipLoad += e.GetEquipCost();
+    }
+
+    public string GetSaveData()
+    {
+        string keeper = $"Mech|Name:{_name}";
+        foreach (Ability a in _abilities)
+        {
+            keeper += a.GetSaveData();
+        }
+        return keeper;
     }
 }

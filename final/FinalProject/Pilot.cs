@@ -56,4 +56,14 @@ public class Pilot
         }
         return 0;
     }
+
+    public string GetSaveData()
+    {
+        string keeper= $"Pilot|Name:{_name}";
+        foreach (Ability a in _abilities)
+        {
+            keeper += a.GetSaveData();
+        }
+        return keeper;
+    }
 }   

@@ -54,4 +54,10 @@ public class ArmorPlating : Equipment
             return 0;
         }
     }
+    public override string GetSaveData(string type)
+    {
+        string keeper = base.GetSaveData(type);
+        keeper += $",DamageReduction:{_damageReduction},MobilityPenalty:{_mobilityPenalty}";
+        return keeper;
+    }
 }

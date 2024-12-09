@@ -57,40 +57,37 @@ class Program
                 if (userUnit == null)
                 {
                     Console.WriteLine("You have no current character!");
-                    try
+                    string answer = YesOrNo("Would you like to use the default character?");
+                    if (answer == "y")
                     {
-                        string answer = YesOrNo("Would you like to use the default character?");
-                        if (answer == "y")
-                        {
-                            userUnit = new Unit();
-                        }
-                        else if (answer == "n")
-                        {
-                            return;
-                        }
-                        else
-                        {
-                            throw new Exception("unrecognized input");
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.Message);
+                        userUnit = new Unit();
+                        userUnit.DisplayInfo();
                     }
                 }
-                userUnit.DisplayInfo();
+                else
+                {
+                    userUnit.DisplayInfo();
+                }
                 Console.WriteLine("\nPress enter to continue");
                 Console.ReadLine();
             }
             if (response == "3")
             //saves a character
             {
-                //i need ro make a way to save a character
+                Console.Write("Where would you like to save to? ");
+                string input = Console.ReadLine();
+                userUnit.SaveUnit(input);
+                Console.WriteLine("Character saved, press enter to continue");
+                Console.ReadLine();
             }
             if (response == "4")
             //loads a character
             {
-                //ditto
+                Console.WriteLine("What character would you like to load? ");
+                string input = Console.ReadLine();
+                userUnit.LoadUnit(input);
+                Console.WriteLine("Character Loaded, press enter to continue");
+                Console.ReadLine();
             }
             if (response == "5")
             //uses current character

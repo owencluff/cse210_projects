@@ -88,7 +88,7 @@ Missing: HP, Movement
     }
     public string GetName()
     {
-        return $"{_pilot.GetName()} {_mech.GetName()}";
+        return $"{_pilot.GetName()}'s {_mech.GetName()}";
     }
     public void AddEquipment(Equipment e)
     {
@@ -241,7 +241,7 @@ Missing: HP, Movement
     }
     static private string ReadData(string[] info, string type)
     {
-        string result = null;
+        string result = "0";
         if (info[0] == type)
         {
             result = info[1];
@@ -254,10 +254,19 @@ Missing: HP, Movement
         List<Ability> abilities = [];
         foreach (string chunk in chunks)
         {
+            string x;
             string[] bits = chunk.Split(':');
-            name = ReadData(bits, "Name");
-            string[] point = ReadData(bits, "Ability").Split('.');
-            abilities.Add(new Ability(point[0], Convert.ToInt32(point[1])));
+            x = ReadData(bits, "Name");
+            if (x != "0")
+            {
+                name = x;
+            }
+            x = ReadData(bits, "Ability");
+            if (x != "0")
+            {
+                string[] point = x.Split('.');
+                abilities.Add(new Ability(point[0], Convert.ToInt32(point[1])));
+            }
         }
         return (name, abilities);
     }

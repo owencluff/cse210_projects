@@ -1,0 +1,4 @@
+Pilot|Name:John Pilot,Ability:Grit.13,Ability:Intuition.16,Ability:Knowledge.26
+Mech|Name:Spirit of Divinity,Ability:Armor.40,Ability:Core.35,Ability:Frame.25,Ability:Mobility.50,Ability:Power.30
+Equipment:Weapon|Name:Rifle,AttackBonus:15,DefenseBonus:0,DodgeBonus:0,EquipCost:1,Range:30,Damage:1
+Equipment:ArmorPlating|Name:Ethereal Plating,AttackBonus:0,DefenseBonus:20,DodgeBonus:10,EquipCost:1,DamageReduction:2,MobilityPenalty:-10

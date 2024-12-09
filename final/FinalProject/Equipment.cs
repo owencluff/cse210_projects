@@ -77,4 +77,11 @@ public abstract class Equipment
     {
         return _abilityBonus;
     }
+
+    public virtual string GetSaveData(string type)
+    {
+        string keeper = $"Equipment:{type}|Name:{_name},AttackBonus:{_attackBonus}";
+        keeper += $",DefenseBonus:{_defenseBonus},DodgeBonus:{_dodgeBonus},EquipCost:{_equipCost}";
+        return keeper;
+    }
 }
