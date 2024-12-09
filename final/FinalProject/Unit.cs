@@ -315,19 +315,19 @@ Missing: HP, Movement
                     rr = Convert.ToInt32(ReadData(bits, "RefreshRate"));
                     dr = Convert.ToInt32(ReadData(bits, "DamageReduction"));
                     mp = Convert.ToInt32(ReadData(bits, "MobilityPenalty"));
-                }
-                var i = (name, ab, deb, dgb, ec);
-                if (type[1] == "Weapon")
-                {
-                    AddEquipment(new Weapon(i, range, damage));
-                }
-                if (type[1] == "Shield")
-                {
-                    AddEquipment(new Shield(i, sp, rr));
-                }
-                if (type[1] == "ArmorPlating")
-                {
-                    AddEquipment(new ArmorPlating(i, dr, mp));
+                    var i = (name, ab, deb, dgb, ec);
+                    if (type[1] == "Weapon")
+                    {
+                        AddEquipment(new Weapon(i, range, damage));
+                    }
+                    if (type[1] == "Shield")
+                    {
+                        AddEquipment(new Shield(i, sp, rr));
+                    }
+                    if (type[1] == "ArmorPlating")
+                    {
+                        AddEquipment(new ArmorPlating(i, dr, mp));
+                    }
                 }
             }
         }
