@@ -270,8 +270,11 @@ Missing: HP, Movement
         }
         return (name, abilities);
     }
-    public void LoadUnit(string filename)
+    public static Unit LoadUnit(string filename)
     {
+        Pilot pilot = null;
+        Mech mech = null;
+        List<Equipment> equip = [];
         string[] lines = System.IO.File.ReadAllLines(filename);
         foreach (string line in lines)
         {
@@ -281,12 +284,12 @@ Missing: HP, Movement
             if (type[0] == "Pilot")
             {
                 var info = GetLoadData(chunks);
-                _pilot = new Pilot(info.Item1, info.Item2);
+                pilot = new Pilot(info.Item1, info.Item2);
             }
             if (type[0] == "Mech")
             {
                 var info = GetLoadData(chunks);
-                _mech = new Mech(info.Item1, info.Item2);
+                mech = new Mech(info.Item1, info.Item2);
             }
             if (type[0] == "Equipment")
             {
@@ -318,18 +321,20 @@ Missing: HP, Movement
                     var i = (name, ab, deb, dgb, ec);
                     if (type[1] == "Weapon")
                     {
-                        AddEquipment(new Weapon(i, range, damage));
+                        equip.Add(new Weapon(i, range, damage));
                     }
                     if (type[1] == "Shield")
                     {
-                        AddEquipment(new Shield(i, sp, rr));
+                        equip.Add(new Shield(i, sp, rr));
                     }
                     if (type[1] == "ArmorPlating")
                     {
-                        AddEquipment(new ArmorPlating(i, dr, mp));
+                        equip.Add(new ArmorPlating(i, dr, mp));
                     }
                 }
             }
         }
+        Mech mech1 = new Mech(mech.GetName(), mech.GetAbilities(), equip);
+        return new Unit(pilot, mech, new Systems(equip));
     }
 }
