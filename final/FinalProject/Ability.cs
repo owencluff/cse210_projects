@@ -15,6 +15,14 @@ public class Ability
         return new Ability(name, Convert.ToInt32(Console.ReadLine()));
     }
 
+    public void UpgradeAbility(int times)
+    {
+        for (int i = 0; i < times; i ++)
+        {
+            _score += 5;
+        }
+    }
+
     public string GetAbility()
     {
         return $"{_name}: {_score}";

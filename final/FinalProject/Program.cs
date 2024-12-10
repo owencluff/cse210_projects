@@ -85,7 +85,7 @@ class Program
             {
                 Console.WriteLine("What character would you like to load? ");
                 string input = Console.ReadLine();
-                userUnit.LoadUnit(input);
+                userUnit = Unit.LoadUnit(input);
                 Console.WriteLine("Character Loaded, press enter to continue");
                 Console.ReadLine();
             }
@@ -118,9 +118,6 @@ class Program
                 }
                 Unit enemy1 = new Unit();
                 //This is mostly just to make sure things are set up correctly
-                enemy1.SetHitPoints();
-                userUnit.SetHitPoints();
-                userUnit.SetMovePoints();
                 while (true)
                 {
                     Console.WriteLine("What would you like to do?");
@@ -138,17 +135,17 @@ class Program
                         int damage = userUnit.MakeAttack(15, enemySuccess, 0);
                         enemy1.TakeDamage(damage);
                     }
-                    if (choice == "2")
+                    else if (choice == "2")
                     {
                         bool playerSuccess = userUnit.MakeDefense(0, 0);
                         int damage = enemy1.MakeAttack(30, playerSuccess, 0);
                     }
-                    if (choice == "3")
+                    else if (choice == "3")
                     {
                         bool playerSuccess = userUnit.MakeDodge(0, 0);
                         int damage = enemy1.MakeAttack(30, playerSuccess, 0);
                     }
-                    if (choice == "4")
+                    else if (choice == "4")
                     {
                         break;
                     }
@@ -170,6 +167,13 @@ class Program
                 if (input == "y")
                 {
                     break;
+                }
+                else if (input == "n")
+                {   
+                }
+                else
+                {
+                    Console.WriteLine("Unknown input");
                 }
             }
             else

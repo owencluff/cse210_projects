@@ -1,35 +1,18 @@
-using System.Reflection;
-
-public class Mech
+public class Mech : HasAbility
 {
-    private string _name  ;
-    //Abilities in order: Armor, Core, Frame, Mobility, Power
-    private List<Ability> _abilities;
     private List<Equipment> _equipment;
     private int _equipLoad = 0;
 
-    public Mech()
+    public Mech() : base("mech")
     {
-        _name = "Default Mech";
-        _abilities = [
-            new Ability("Armor", 30),
-            new Ability("Core", 30),
-            new Ability("Frame", 30),
-            new Ability("Mobility", 30),
-            new Ability("Power", 30)
-        ];
         _equipment = [new Weapon()];
     }
-    public Mech(string n, List<Ability> a)
+    public Mech(string n, List<Ability> a) : base(n, a)
     {
-        _name = n;
-        _abilities = a;
         _equipment = new List<Equipment>();
     }
-    public Mech(string n, List<Ability> a, List<Equipment> e)
+    public Mech(string n, List<Ability> a, List<Equipment> e) : base(n, a)
     {
-        _name = n;
-        _abilities = a;
         _equipment = e;
     }
 
@@ -45,13 +28,10 @@ public class Mech
        return new Mech(name, [arm, core, frame, mob, pow]);
     }
 
-    public void DisplayMech()
+    public override void DisplayAbilities()
     {
         Console.WriteLine("Mech Abilities");
-        foreach(Ability a in _abilities)
-        {
-            Console.WriteLine(a.GetAbility());
-        }
+        base.DisplayAbilities();
     }
     public void DisplayEquipment()
     {
@@ -59,14 +39,6 @@ public class Mech
         {
             e.DisplayEquipment();
         }
-    }
-    public string GetName()
-    {
-        return _name;
-    }
-    public List<Ability> GetAbilities()
-    {
-        return _abilities;
     }
     public List<Equipment> GetEquipment()
     {
@@ -84,17 +56,6 @@ public class Mech
     {
         return _equipment.OfType<T>().FirstOrDefault();
     }
-    public int GetAbilityScore(string name)
-    {
-        foreach(Ability a in _abilities)
-        {
-            if(a.GetAbilityName() == name)
-            {
-                return a.GetAbilityScore();
-            }
-        }
-        return 0;
-    }
 
     public void EquipItem(Equipment e)
     {
@@ -102,13 +63,8 @@ public class Mech
         _equipLoad += e.GetEquipCost();
     }
 
-    public string GetSaveData()
+    public override string GetSaveData()
     {
-        string keeper = $"Mech|Name:{_name}";
-        foreach (Ability a in _abilities)
-        {
-            keeper += a.GetSaveData();
-        }
-        return keeper;
+        return "Mech" + base.GetSaveData();
     }
 }

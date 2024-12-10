@@ -3,7 +3,7 @@ public class Systems
     private int _attackBonus = 0;
     private int _defenseBonus = 0;
     private int _dodgeBonus = 0;
-    private List<Ability> _abilityBonuses = [];
+    private List<Ability> _abilityBonuses = new List<Ability>();
 
     public Systems()
     {

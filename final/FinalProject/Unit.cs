@@ -96,6 +96,10 @@ Missing: HP, Movement
         {
             _systems.AddSystem(e);
             _mech.EquipItem(e);
+            if (e.GetType().ToString() == "Weapon")
+            {
+                _weapon = e as Weapon;
+            }
         }
     }
 
@@ -107,11 +111,28 @@ Missing: HP, Movement
     */
     {
         Console.WriteLine(GetName());
-        _pilot.DisplayPilot();
+        _pilot.DisplayAbilities();
         Console.WriteLine();
-        _mech.DisplayMech();
+        _mech.DisplayAbilities();
         Console.WriteLine();
         _systems.DisplaySystems();
+        Console.WriteLine();
+        _weapon.DisplayEquipment();
+    }
+
+    public void UpgradeUnit()
+    /*
+    asks if upgrading pilot, mech, or equipment
+
+    */
+    {
+        Console.WriteLine("Would you like to upgrade your Pilot, Mech, or Equipment?");
+        Console.Write("(Pilot/Mech/Equipment)>| ");
+        string answer = Console.ReadLine();
+        if (answer == "Pilot")
+        {
+
+        }
     }
 
     /*
@@ -130,7 +151,9 @@ Missing: HP, Movement
     public int GetCheckScore(int bonus, string pilotAbility, string mechAbility)
     //takes the two abilities to be used and the total bonus, adds them together;
     {
-        return _pilot.GetAbilityScore(pilotAbility) + _mech.GetAbilityScore(mechAbility) + bonus;
+        int pilotS = _pilot.GetAbilityScore(pilotAbility);
+        int mechS = _mech.GetAbilityScore(mechAbility);
+        return pilotS + mechS + bonus;
     }
 
     public int DetermineAttackBonus(int weaponRange, int targetRange, int other)
@@ -304,37 +327,66 @@ Missing: HP, Movement
                 int rr = 0;
                 int dr = 0;
                 int mp = 0;
-                foreach (string chunk in chunks)
+                if (type[1] == "Weapon")
                 {
-                    string[] bits = chunk.Split(':');
-                    name = ReadData(bits, "Name");
-                    ab = Convert.ToInt32(ReadData(bits, "AttackBonus"));
-                    deb = Convert.ToInt32(ReadData(bits, "DefenseBonus"));
-                    dgb = Convert.ToInt32(ReadData(bits, "DodgeBonus"));
-                    ec = Convert.ToInt32(ReadData(bits, "EquipCost"));
-                    range = Convert.ToInt32(ReadData(bits, "Range"));
-                    damage = Convert.ToInt32(ReadData(bits, "Damage"));
-                    sp = Convert.ToInt32(ReadData(bits, "ShieldPoints"));
-                    rr = Convert.ToInt32(ReadData(bits, "RefreshRate"));
-                    dr = Convert.ToInt32(ReadData(bits, "DamageReduction"));
-                    mp = Convert.ToInt32(ReadData(bits, "MobilityPenalty"));
+                    foreach (string chunk in chunks)
+                    {
+                        string[] bits = chunk.Split(':');
+                        if (bits[0] == "Name")
+                        {
+                            name = bits[1];
+                        }
+                        ab += Convert.ToInt32(ReadData(bits, "AttackBonus"));
+                        deb += Convert.ToInt32(ReadData(bits, "DefenseBonus"));
+                        dgb += Convert.ToInt32(ReadData(bits, "DodgeBonus"));
+                        ec += Convert.ToInt32(ReadData(bits, "EquipCost"));
+                        range += Convert.ToInt32(ReadData(bits, "Range"));
+                        damage += Convert.ToInt32(ReadData(bits, "Damage"));
+                    }
                     var i = (name, ab, deb, dgb, ec);
-                    if (type[1] == "Weapon")
+                    equip.Add(new Weapon(i, range, damage));
+                }
+                else if (type[1] == "Shield")
+                {
+                    foreach (string chunk in chunks)
                     {
-                        equip.Add(new Weapon(i, range, damage));
+                        string[] bits = chunk.Split(':');
+                        if (bits[0] == "Name")
+                        {
+                            name = bits[1];
+                        }
+                        ab += Convert.ToInt32(ReadData(bits, "AttackBonus"));
+                        deb += Convert.ToInt32(ReadData(bits, "DefenseBonus"));
+                        dgb += Convert.ToInt32(ReadData(bits, "DodgeBonus"));
+                        ec += Convert.ToInt32(ReadData(bits, "EquipCost"));
+                        sp += Convert.ToInt32(ReadData(bits, "ShieldPoints"));
+                        rr += Convert.ToInt32(ReadData(bits, "RefreshRate"));
                     }
-                    if (type[1] == "Shield")
+                    var i = (name, ab, deb, dgb, ec);
+                    equip.Add(new Shield(i, sp, rr));
+                }
+                else if (type[1] == "ArmorPlating")
+                {
+                    foreach (string chunk in chunks)
                     {
-                        equip.Add(new Shield(i, sp, rr));
+                        string[] bits = chunk.Split(':');
+                        if (bits[0] == "Name")
+                        {
+                            name = bits[1];
+                        }
+                        ab += Convert.ToInt32(ReadData(bits, "AttackBonus"));
+                        deb += Convert.ToInt32(ReadData(bits, "DefenseBonus"));
+                        dgb += Convert.ToInt32(ReadData(bits, "DodgeBonus"));
+                        ec += Convert.ToInt32(ReadData(bits, "EquipCost"));
+                        dr += Convert.ToInt32(ReadData(bits, "DamageReduction"));
+                        mp += Convert.ToInt32(ReadData(bits, "MobilityPenalty"));
                     }
-                    if (type[1] == "ArmorPlating")
-                    {
-                        equip.Add(new ArmorPlating(i, dr, mp));
-                    }
+                    var i = (name, ab, deb, dgb, ec);
+                    equip.Add(new ArmorPlating(i, dr, mp));
                 }
             }
         }
         Mech mech1 = new Mech(mech.GetName(), mech.GetAbilities(), equip);
-        return new Unit(pilot, mech, new Systems(equip));
+        return new Unit(pilot, mech1, new Systems(equip));
     }
 }
