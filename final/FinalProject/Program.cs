@@ -27,11 +27,14 @@ class Program
             if (response == "1")
             //creates a new character
             {
+                Equipment toAdd = new Weapon();
                 userUnit = Unit.CreateUnit();
                 string input = YesOrNo("Would you like to create a custom Weapon?");
                 if (input == "y")
                 {
-                    userUnit.AddEquipment(Weapon.CreateWeapon());
+                    
+                    toAdd.CreateItem<Weapon>();
+                    userUnit.AddEquipment(toAdd);
                 }
                 else
                 {
@@ -40,12 +43,14 @@ class Program
                 input = YesOrNo("Would you like to create a custom Shield?");
                 if (input == "y")
                 {
-                    userUnit.AddEquipment(Shield.CreateShield());
+                    toAdd.CreateItem<Shield>();
+                    userUnit.AddEquipment(toAdd);
                 }
                 input = YesOrNo("Would you like to create custom Armor Plating?");
                 if (input == "y")
                 {
-                    userUnit.AddEquipment(ArmorPlating.CreatePlating());
+                    toAdd.CreateItem<ArmorPlating>();
+                    userUnit.AddEquipment(toAdd);
                 }
                 userUnit.SetHitPoints();
                 userUnit.SetMovePoints();
@@ -158,8 +163,22 @@ class Program
             if (response == "6")
             //upgrade a unit
             {
-                //add or remove equipment
-                //upgrade stats?
+                Console.WriteLine("Would you like to upgrade your Pilot, Mech, or Equipment?");
+                Console.Write("(Pilot/Mech/Equipment)>| ");
+                string answer = Console.ReadLine();
+                if (answer == "Pilot")
+                {
+                    userUnit.UpgradePilot();
+                }
+                if (answer == "Mech")
+                {
+                    userUnit.UpgradeMech();
+                }
+                if (answer == "Equipment")
+                {
+                    //this will be fun!
+                    userUnit.UpgradeEquipment();
+                }
             }
             if (response == "7")
             {

@@ -25,6 +25,7 @@ public class Mech : HasAbility
        Ability frame = Ability.SetAbility("Frame");
        Ability mob = Ability.SetAbility("Mobility");
        Ability pow = Ability.SetAbility("Power");
+       Console.WriteLine();
        return new Mech(name, [arm, core, frame, mob, pow]);
     }
 
@@ -61,6 +62,24 @@ public class Mech : HasAbility
     {
         _equipment.Add(e);
         _equipLoad += e.GetEquipCost();
+    }
+    public void RemoveEquipment(Equipment e)
+    {
+        _equipment.Remove(e);
+    }
+    public void UpgradeEquipment()
+    {
+        Console.Write("Name of item to upgrade: ");
+            string name = Console.ReadLine();
+            Equipment item = null;
+            foreach (Equipment e in _equipment)
+            {
+                if (e.GetName() == name)
+                {
+                    item = e;
+                }
+            }
+            item.UpgradeItem();
     }
 
     public override string GetSaveData()

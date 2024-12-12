@@ -55,13 +55,24 @@ public abstract class HasAbility
     {
         return GetAbility(name).GetAbilityScore();
     }
-
     public virtual void DisplayAbilities()
     {
         foreach (Ability a in _abilities)
         {
             Console.WriteLine(a.GetAbility());
         }
+        Console.WriteLine();
+    }
+
+    public void Upgrade()
+    {
+        DisplayAbilities();
+        Console.Write("Ability to Upgrade: ");
+        string ability = Console.ReadLine();
+        Console.Write("How many times? ");
+        int times = Convert.ToInt32(Console.ReadLine());
+        GetAbility(ability).UpgradeAbility(times);
+        Console.WriteLine($"{ability} upgraded {times} time(s)");
     }
     
     public virtual string GetSaveData()

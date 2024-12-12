@@ -14,20 +14,23 @@ public class Weapon : Equipment
         _damage = da;
     }
 
-    static public Weapon CreateWeapon()
+    public override void CreateItem<Weapon>()
     {
-       var i = CreateEquipmentBonus();
-       Console.Write("Range: ");
-       int r = Convert.ToInt32(Console.ReadLine());
-       Console.Write("Damage: ");
-       int d = Convert.ToInt32(Console.ReadLine());
-       return new Weapon(i, r, d);
+        var i = CreateEquipmentBonus();
+        Console.Write("Range: ");
+        _range = Convert.ToInt32(Console.ReadLine());
+        Console.Write("Damage: ");
+        _damage = Convert.ToInt32(Console.ReadLine());
+        SetAttributes(i);
+        Console.WriteLine();
     }
+
     public override void DisplayEquipment()
     {
         base.DisplayEquipment();
         Console.WriteLine($"Range: {_range}");
         Console.WriteLine($"Damage: {_damage}");
+        Console.WriteLine();
     }
     public int GetRange()
     {
@@ -36,6 +39,30 @@ public class Weapon : Equipment
     public int GetDamage()
     {
         return _damage;
+    }
+
+    public override void UpgradeItem()
+    {
+        Console.WriteLine("Upgrade bonus, range, or damage?");
+        Console.Write("(Bonus/Range/Damage)>| ");
+        string answer = Console.ReadLine();
+        Console.Write("How many times? ");
+        int times = Convert.ToInt32(Console.ReadLine());
+        for (int i = 0; i < times; i ++)
+        {
+            if (answer == "Bonus")
+            {
+                base.UpgradeBonus();
+            }
+        if (answer == "Range")
+            {
+                _range += 5;
+            }
+        if (answer == "Damage")
+            {
+                _damage += 1;
+            }
+        }
     }
 
     public int RollDamage()

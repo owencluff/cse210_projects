@@ -19,17 +19,18 @@ public class ArmorPlating : Equipment
     {
         _damageReduction = dr;
         _mobilityPenalty = mp;
-        base.SetAbilityBonus(new Ability("Mobility", -mp));
+        SetAbilityBonus(new Ability("Mobility", -mp));
     }
 
-    static public ArmorPlating CreatePlating()
+    public override void CreateItem<ArmorPlating>()
     {
         var i = CreateEquipmentBonus();
         Console.Write("Damage Reduction: ");
-        int dr = Convert.ToInt32(Console.ReadLine());
+        _damageReduction = Convert.ToInt32(Console.ReadLine());
         Console.Write("Mobility Penalty: ");
-        int mp = Convert.ToInt32(Console.ReadLine());
-        return new ArmorPlating(i, dr, mp);
+        _mobilityPenalty = Convert.ToInt32(Console.ReadLine());
+        SetAttributes(i);
+        Console.WriteLine();
     }
 
     public override void DisplayEquipment()
@@ -37,11 +38,38 @@ public class ArmorPlating : Equipment
         base.DisplayEquipment();
         Console.WriteLine($"Damage Reduction: {_damageReduction}");
         Console.WriteLine($"Mobility Penalty: {_mobilityPenalty}");
+        Console.WriteLine();
     }
     public int GetDamageReduction()
     {
         return _damageReduction;
     }
+
+    public override void UpgradeItem()
+    {
+        Console.WriteLine("Upgrade bonus, damage reduction, or mobility penalty?");
+        Console.Write("(Bonus/Damage Reduction/Mobility Penalty)>| ");
+        string answer = Console.ReadLine();
+        Console.Write("How many times? ");
+        int times = Convert.ToInt32(Console.ReadLine());
+        for (int i = 0; i < times; i++)
+        {
+            if (answer == "Bonus")
+            {
+                UpgradeBonus();
+            }
+            if (answer == "Damage Reduction")
+            {
+                _damageReduction += 1;
+            }
+            if (answer == "Mobility Penalty")
+            {
+                _mobilityPenalty -= 5;
+            }
+        }
+        Console.WriteLine($"{answer} upgraded {times} time(s)");
+    }
+
     public int ReduceDamage(int damage)
     {
         int result = damage - _damageReduction;

@@ -18,16 +18,15 @@ public class Shield : Equipment
         _shieldRefresh = r;
     }
 
-    static public Shield CreateShield()
+    public override void CreateItem<Shield>()
     {
         var i = CreateEquipmentBonus();
-        Console.Write("Equip Cost: ");
-        int ec = Convert.ToInt32(Console.ReadLine());
         Console.Write("Shield Points: ");
-        int sp = Convert.ToInt32(Console.ReadLine());
+        _shieldPoints = Convert.ToInt32(Console.ReadLine());
         Console.Write("Refresh Rate: ");
-        int rr = Convert.ToInt32(Console.ReadLine());
-        return new Shield(i, sp, rr);
+        _shieldRefresh = Convert.ToInt32(Console.ReadLine());
+        SetAttributes(i);
+        Console.WriteLine();
     }
 
     public override void DisplayEquipment()
@@ -35,6 +34,7 @@ public class Shield : Equipment
         base.DisplayEquipment();
         Console.WriteLine($"Shield Points: {_shieldPoints}");
         Console.WriteLine($"Shield Refresh: {_shieldRefresh}");
+        Console.WriteLine();
     }
     public int GetShieldPoints()
     {
@@ -43,6 +43,30 @@ public class Shield : Equipment
     public int GetShieldRefresh()
     {
         return _shieldRefresh;
+    }
+    public override void UpgradeItem()
+    {
+        Console.WriteLine("Upgrade Bonus, Shield Points, or Refresh Rate?");
+        Console.Write("(Bonus/Shield Points/Refresh Rate)>| ");
+        string answer = Console.ReadLine();
+        Console.Write("How many times? ");
+        int times = Convert.ToInt32(Console.ReadLine());
+        for (int i = 0; i < times; i ++)
+        {
+            if (answer == "Bonus")
+            {
+                UpgradeBonus();
+            }
+            if (answer == "Shield Points")
+            {
+                _shieldPoints += 1;
+            }
+            if (answer == "Refresh Rate")
+            {
+                _shieldRefresh += 1;
+            }
+        }
+        Console.WriteLine($"{answer} upgraded {times} time(s)");
     }
 
     public int ShieldDamage(int damage)

@@ -7,6 +7,15 @@ public abstract class Equipment
     private int _equipCost;
     private Ability _abilityBonus;
 
+    public Equipment()
+    {
+        _name = "Name";
+        _attackBonus = 0;
+        _defenseBonus = 0;
+        _dodgeBonus = 0;
+        _equipCost = 0;
+        _abilityBonus = null;
+    }
     public Equipment((string, int, int, int, int) i)
     {
         _name = i.Item1;
@@ -39,6 +48,40 @@ public abstract class Equipment
         Console.Write("Equip Cost: ");
         int cost = Convert.ToInt32(Console.ReadLine());
         return (name, ab, deb, dgb, cost);
+    }
+    public virtual void CreateItem<T>() where T : Equipment
+    {
+        SetAttributes(("name", 0, 0, 0, 0));
+    }
+    static public Equipment CreateEquipment()
+    {
+        Equipment toAdd = null;
+        Console.WriteLine("Create a weapon, shield, or armor plating?");
+        Console.Write("(Weapon/Shield/ArmorPlating)>| ");
+        string answer = Console.ReadLine();
+        if (answer == "Weapon")
+        {
+            toAdd.CreateItem<Weapon>();
+        }
+        if (answer == "Shield")
+        {
+            toAdd.CreateItem<Shield>();
+        }
+        if (answer == "Armor Plating")
+        {
+            toAdd.CreateItem<ArmorPlating>();
+        }
+        return toAdd;
+    }
+
+    public virtual void SetAttributes((string, int, int, int, int) i)
+    {
+        _name = i.Item1;
+        _attackBonus = i.Item2;
+        _defenseBonus = i.Item3;
+        _dodgeBonus = i.Item4;
+        _equipCost = i.Item5;
+        _abilityBonus = null;
     }
 
     public virtual void DisplayEquipment()
@@ -76,6 +119,26 @@ public abstract class Equipment
     public Ability GetAbilityBonus()
     {
         return _abilityBonus;
+    }
+
+    public abstract void UpgradeItem();
+    public virtual void UpgradeBonus()
+    {
+        Console.WriteLine("Upgrade attack, defense, or dodge bonus?");
+        Console.Write("(Attack/Defense/Dodge)>| ");
+        string answer = Console.ReadLine();
+        if (answer == "Attack")
+        {
+            _attackBonus += 5;
+        }
+        if (answer == "Defense")
+        {
+            _defenseBonus += 5;
+        }
+        if (answer == "Dodge")
+        {
+            _dodgeBonus += 5;
+        }
     }
 
     public virtual string GetSaveData(string type)

@@ -98,6 +98,7 @@ Missing: HP, Movement
             _mech.EquipItem(e);
             if (e.GetType().ToString() == "Weapon")
             {
+                _mech.RemoveEquipment(_weapon);
                 _weapon = e as Weapon;
             }
         }
@@ -112,26 +113,32 @@ Missing: HP, Movement
     {
         Console.WriteLine(GetName());
         _pilot.DisplayAbilities();
-        Console.WriteLine();
         _mech.DisplayAbilities();
-        Console.WriteLine();
         _systems.DisplaySystems();
-        Console.WriteLine();
         _weapon.DisplayEquipment();
     }
 
-    public void UpgradeUnit()
-    /*
-    asks if upgrading pilot, mech, or equipment
-
-    */
+    public void UpgradePilot()
     {
-        Console.WriteLine("Would you like to upgrade your Pilot, Mech, or Equipment?");
-        Console.Write("(Pilot/Mech/Equipment)>| ");
+        _pilot.Upgrade();
+    }
+    public void UpgradeMech()
+    {
+        _mech.Upgrade();
+    }
+    public void UpgradeEquipment()
+    {
+        _mech.DisplayEquipment();
+        Console.WriteLine("Upgrade an existing item or add a new one?");
+        Console.Write("(Upgrade/Add)>| ");
         string answer = Console.ReadLine();
-        if (answer == "Pilot")
+        if (answer == "Upgrade")
         {
-
+            _mech.UpgradeEquipment();
+        }
+        if (answer == "Add")
+        {
+            AddEquipment(Equipment.CreateEquipment());
         }
     }
 
