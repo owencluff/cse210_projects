@@ -14,6 +14,7 @@ public class Pilot : HasAbility
         Ability grit = Ability.SetAbility("Grit");
         Ability intuit = Ability.SetAbility("Intuition");
         Ability know = Ability.SetAbility("Knowledge");
+        Console.WriteLine();
         return new Pilot(name, [grit, intuit, know]);
     }
 

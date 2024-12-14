@@ -38,12 +38,26 @@ public abstract class Equipment
         string response = Console.ReadLine();
         if (response == "y")
         {
-            Console.Write("Attack Bonus: ");
-            ab = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Defense Bonus: ");
-            deb = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Dodge Bonus: ");
-            dgb = Convert.ToInt32(Console.ReadLine());
+            int i = 0;
+            do
+            {
+                try
+                {
+                    Console.Write("Attack Bonus: ");
+                    ab = Convert.ToInt32(Console.ReadLine());
+                    Console.Write("Defense Bonus: ");
+                    deb = Convert.ToInt32(Console.ReadLine());
+                    Console.Write("Dodge Bonus: ");
+                    dgb = Convert.ToInt32(Console.ReadLine());
+                    i ++;
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+            }
+            while(i == 0);
         }
         Console.Write("Equip Cost: ");
         int cost = Convert.ToInt32(Console.ReadLine());
@@ -63,13 +77,17 @@ public abstract class Equipment
         {
             toAdd.CreateItem<Weapon>();
         }
-        if (answer == "Shield")
+        else if (answer == "Shield")
         {
             toAdd.CreateItem<Shield>();
         }
-        if (answer == "Armor Plating")
+        else if (answer == "Armor Plating")
         {
             toAdd.CreateItem<ArmorPlating>();
+        }
+        else
+        {
+            Console.WriteLine("Unknown input");
         }
         return toAdd;
     }

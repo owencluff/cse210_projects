@@ -1,0 +1,3 @@
+Pilot|Name:Handel,Ability:Grit.30,Ability:Intuition.30,Ability:Knowledge.30
+Mech|Name:Bar,Ability:Armor.30,Ability:Core.30,Ability:Frame.30,Ability:Mobility.30,Ability:Power.30
+Equipment:Weapon|Name:Rifle,AttackBonus:15,DefenseBonus:0,DodgeBonus:0,EquipCost:1,Range:30,Damage:1

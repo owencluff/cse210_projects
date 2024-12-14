@@ -11,8 +11,24 @@ public class Ability
 
     static public Ability SetAbility(string name)
     {
-        Console.Write($"Enter the {name}: ");
-        return new Ability(name, Convert.ToInt32(Console.ReadLine()));
+        int score = 0;
+        do
+        {
+            try
+            {
+                Console.Write($"Enter the {name}: ");
+                score = Convert.ToInt32(Console.ReadLine());
+                if (score == 0)
+                {
+                    throw new Exception("Ability Score cannot be zero");
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }while(score == 0);
+        return new Ability(name, score);
     }
 
     public void UpgradeAbility(int times)

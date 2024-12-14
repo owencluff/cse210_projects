@@ -90,6 +90,10 @@ Missing: HP, Movement
     {
         return $"{_pilot.GetName()}'s {_mech.GetName()}";
     }
+    public Weapon GetWeapon()
+    {
+        return _weapon;
+    }
     public void AddEquipment(Equipment e)
     {
         if((_mech.GetEquipLoad() + e.GetEquipCost()) < _mech.GetMaxEquipLoad())

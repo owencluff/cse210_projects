@@ -8,11 +8,11 @@ class Program
     }
     static void Main(string[] args)
     {
-        Unit userUnit = null; //this is created here so I can catch a user not creating a character
+        Unit userUnit = new Unit(); //this is created here so I can catch a user not creating a character
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("Hello and Welcome!");
+            Console.WriteLine($"Currently using character: {userUnit.GetName()}");
             Console.WriteLine("What would you like to do?");
             Console.WriteLine("1) Create a character");
             Console.WriteLine("2) View your Character");
@@ -27,9 +27,25 @@ class Program
             if (response == "1")
             //creates a new character
             {
-                Equipment toAdd = new Weapon();
+                Equipment toAdd;
                 userUnit = Unit.CreateUnit();
-                string input = YesOrNo("Would you like to create a custom Weapon?");
+                string input = YesOrNo("Create custom equipment? ");
+                List<Equipment> adding = [];
+                while (input == "y")
+                {
+                    toAdd = Equipment.CreateEquipment();
+                    adding.Add(toAdd);
+                    input = YesOrNo("Create another?");
+                }
+                foreach (Equipment e in adding)
+                {
+                    userUnit.AddEquipment(e);
+                }
+                if (userUnit.GetWeapon() == null)
+                {
+                    userUnit.AddEquipment(new Weapon());
+                }
+                /*string input = YesOrNo("Would you like to create a custom Weapon?");
                 if (input == "y")
                 {
                     
@@ -54,25 +70,12 @@ class Program
                 }
                 userUnit.SetHitPoints();
                 userUnit.SetMovePoints();
-                userUnit.SetWeapon();
+                userUnit.SetWeapon();*/
             }
             if (response == "2")
             //displays current character
             {
-                if (userUnit == null)
-                {
-                    Console.WriteLine("You have no current character!");
-                    string answer = YesOrNo("Would you like to use the default character?");
-                    if (answer == "y")
-                    {
-                        userUnit = new Unit();
-                        userUnit.DisplayInfo();
-                    }
-                }
-                else
-                {
-                    userUnit.DisplayInfo();
-                }
+                userUnit.DisplayInfo();
                 Console.WriteLine("\nPress enter to continue");
                 Console.ReadLine();
             }
@@ -97,30 +100,6 @@ class Program
             if (response == "5")
             //uses current character
             {
-                if (userUnit == null)
-                {
-                    Console.WriteLine("You have no current character!");
-                    try
-                    {
-                        string answer = YesOrNo("Would you like to use the default unit?");
-                        if (answer == "y")
-                        {
-                            userUnit = new Unit();
-                        }
-                        else if (answer == "n")
-                        {
-                            return;
-                        }
-                        else
-                        {
-                            throw new Exception("unrecognized input");
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.Message);
-                    }
-                }
                 Unit enemy1 = new Unit();
                 //This is mostly just to make sure things are set up correctly
                 while (true)
@@ -170,14 +149,18 @@ class Program
                 {
                     userUnit.UpgradePilot();
                 }
-                if (answer == "Mech")
+                else if (answer == "Mech")
                 {
                     userUnit.UpgradeMech();
                 }
-                if (answer == "Equipment")
+                else if (answer == "Equipment")
                 {
                     //this will be fun!
                     userUnit.UpgradeEquipment();
+                }
+                else
+                {
+                    Console.WriteLine("Unknown input");
                 }
             }
             if (response == "7")
@@ -197,7 +180,7 @@ class Program
             }
             else
             {
-                Console.WriteLine("Input not understood");
+                Console.WriteLine("Unknown input");
             }
         }
     }
